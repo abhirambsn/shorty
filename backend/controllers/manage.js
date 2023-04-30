@@ -1,7 +1,15 @@
-const userModel = require("../models/User");
-const urlModel = require("../models/Url");
 const argon2 = require("argon2");
 const jwt = require("jsonwebtoken");
+
+// Models
+const userModel = require("../models/User");
+const urlModel = require("../models/Url");
+
+// Validators
+const newUserValidator = require('../validators/NewUserValidator')
+const loginValidator = require('../validators/LoginValidator')
+const urlValidator = require('../validators/UrlValidator')
+
 
 const chkEmail = async (email) => {
   const emailChk = await userModel.findOne({ email }).exec();
@@ -15,6 +23,12 @@ const registerUser = async (req, res) => {
   // Check for email
   if (await chkEmail(email)) {
     return res.status(400).json({ message: "Email Exists!" });
+  }
+
+  try {
+    await newUserValidator.validateAsync({email, password, name})
+  } catch (err) {
+    return res.status(400).json({error: err})
   }
 
   const hashedPassword = await argon2.hash(password);
@@ -37,6 +51,12 @@ const verifyPassword = async (hash, plain) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
+
+  try {
+    await loginValidator.validateAsync({email, password})
+  } catch (err) {
+    return res.status(400).json({error: err})
+  }
 
   const user = await userModel.findOne({ email }).exec();
 
@@ -102,6 +122,12 @@ const generate_id = (n_char = 5) =>
 const createUrl = async (req, res) => {
   const { url, title } = req.body;
   const created_by = req?.user?._id;
+
+  try {
+    await urlValidator.validateAsync({url, title, created_by})
+  } catch (err) {
+    return res.status(400).json({error: err})
+  }
 
   const s_id = generate_id();
 

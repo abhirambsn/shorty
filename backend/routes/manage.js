@@ -23,10 +23,10 @@ router.post("/user/login", loginUser)
 router.put("/user", middleware, modifyUser); // Modify Profile
 router.delete("/user", middleware, deleteUser); // Delete Account
 
-router.get("/", middleware, getUrls); // Return all urls shortened by the user (Middleware Y)
-router.get("/:url_id", middleware, getUrlById);
-router.post("/", middleware, createUrl); // Create new shortened url (Middleware Y)
-router.put("/:url_id", middleware, modifyUrl); // Modify Shortened Url (Middleware Y)
-router.delete("/:url_id", middleware, deleteUrl); // Delete a Shortened Url (Middleware Y)
+router.get("/urls", middleware, getUrls); // Return all urls shortened by the user (Middleware Y)
+router.post("/urls", middleware, createUrl); // Create new shortened url (Middleware Y)
+router.get("/urls/:url_id", middleware, getUrlById);
+router.put("/urls/:url_id", middleware, modifyUrl); // Modify Shortened Url (Middleware Y)
+router.delete("/urls/:url_id", middleware, deleteUrl); // Delete a Shortened Url (Middleware Y)
 
 module.exports = router;
