@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './login.css'
+import { Dashboard } from "./dashboard";
 export const Login = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
@@ -23,6 +24,7 @@ export const Login = (props) => {
             <button className="link-btn-2">Forgot Password ?</button>
             <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Don't have an account? <span>Register here.</span></button>
         </div>
+       
         </div>
     )
 }

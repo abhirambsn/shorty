@@ -5,6 +5,9 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-image:url('C:\Users\Mukund Maheshwari\Desktop\shorty\client\src\assets\sea-edge-79ab30e2.png');
+    background-size: 4000px 1080px;
+
   }
   
   code {
