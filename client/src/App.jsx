@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import './App.css'
-import { Login } from './Components/Login'
-import { Register } from './Components/Register'
-import { Dashboard } from './Components/dashboard'
-import { BrowserRouter, Route, Switch ,Link} from "react-router-dom";
-function App() {
-  const [currentForm, setCurrentForm] = useState('login');
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
+import {ToastContainer} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+import Profile from "./pages/Profile";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Landing />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />
   }
+]);
 
+const App = () => {
   return (
-    <>
-    <Dashboard/>
-  
-    {/* <div className="App">
-      {
-        currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />
-      }
-    </div> */}
-    {/* <BrowserRouter>
-          <Switch>
-          <Route exact path="/" component={Login} />
-            <Route path="/signup" component={Register} />
-            <Route path="/login" component={Login} />
-            <Route path="/dashboard" component={Dashboard} />
-          </Switch>
-    </BrowserRouter> */}
-    </>
+    <div className="font-nunito flex-col">
+      <div className="flex-1">
+        <ToastContainer />
+        <RouterProvider router={router} />
+      </div>
+    </div>
   );
-}
+};
 
-export default App
+export default App;

@@ -108,6 +108,10 @@ const modifyUser = async (req, res) => {
 
   const modfiedData = req.body;
 
+  if (modfiedData?.name) {
+    modfiedData.image = `https://api.dicebear.com/6.x/initials/svg?seed=${encodeURI(modfiedData?.name)}`
+  }
+
   const updateUser = await userModel.updateOne({ _id: user?._id }, modfiedData);
   if (!updateUser) {
     return res.status(404).json({ message: "User not found!" });
