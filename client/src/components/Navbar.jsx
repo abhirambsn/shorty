@@ -25,10 +25,10 @@ const Navbar = ({authenticated = false}) => {
         {!authenticated ? (
             <ul className="flex items-center justify-center gap-2">
             <li>
-                <button className="px-4 py-2 rounded-lg bg-blue-500 text-white transition-all duration-150 ease-in-out hover:bg-blue-700">Login</button>
+                <button onClick={() => navigate('/login')} className="px-4 py-2 rounded-lg bg-blue-500 text-white transition-all duration-150 ease-in-out hover:bg-blue-700">Login</button>
             </li>
             <li>
-                <button className="px-3 py-2 border border-green-500 rounded-lg text-green-500 transition-all duration-150 ease-in-out hover:text-white hover:bg-green-600 hover:border-green-600">Register</button>
+                <button onClick={() => navigate('/register')} className="px-3 py-2 border border-green-500 rounded-lg text-green-500 transition-all duration-150 ease-in-out hover:text-white hover:bg-green-600 hover:border-green-600">Register</button>
             </li>
         </ul>
         ): (
